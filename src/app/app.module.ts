@@ -8,10 +8,12 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from '../environments/environment';
+import { DataformComponent } from './dataform/dataform.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DataformComponent
   ],
   imports: [
     BrowserModule,
