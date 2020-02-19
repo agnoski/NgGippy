@@ -10,12 +10,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { DataformComponent } from './dataform/dataform.component';
 import { SummaryComponent } from './summary/summary.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataformComponent,
-    SummaryComponent
+    SummaryComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
