@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BillService } from '../bill.service';
+import { Bill } from '../bill'
 
 @Component({
   selector: 'app-bill-details',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillDetailsComponent implements OnInit {
 
-  constructor() { }
+	@Input() bill: Bill;
+	
+	constructor(private billsService: BillService) { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
+
+	updateBill(bill: Bill) {
+		this.billService
+		.updateBill(this.key, bill)
+		.catch(err => console.log(err));
+	}
+
+	deleteBill() {
+		this.billService
+		.deleteBill(this.key)
+		.catch(err => console.log(err));
+	}
 
 }
