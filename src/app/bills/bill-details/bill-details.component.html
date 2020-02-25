@@ -1,1 +1,13 @@
 <p>bill-details works!</p>
+<div *ngIf="bill">
+	<div>
+		<label>Amount: </label> {{bill.amount}}
+	</div>
+	<div>
+		<label>Category: </label> {{bill.category}}
+	</div>
+	<div>
+		<label>Shop: </label> {{bill.shop}}
+	</div>
+	<button (click)='deleteBill()'>Delete</button>
+</div>
