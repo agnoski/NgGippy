@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Bill } from '../bill';
+import { BillService } from '../bill.service';
 
 @Component({
   selector: 'app-bill-form',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillFormComponent implements OnInit {
 
-  constructor() { }
+	bill: Bill = new Bill();
+	submitted = false;
 
-  ngOnInit(): void {
-  }
+	constructor(private billService: BillService) { }
+
+	ngOnInit(): void {
+	}
+
+	newBill(): void {
+		this.submitted = false;
+		this.bill = new Bill();
+	}
+
+	addBill(): void {
+		this.billService.addBill(this.bill);
+		this.bill = new Bill();
+	}
+
+	onSubmit() {
+		this.submitted = true;
+		this.addBill();
+	}
 
 }
