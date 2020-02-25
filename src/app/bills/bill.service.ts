@@ -11,7 +11,7 @@ export class BillService {
 	billsRef : AngularFireList<Bill> = null;
 	
 	constructor(private db: AngularFireDatabase) {
- 		this.billsRef = db.list(dbPath);
+ 		this.billsRef = db.list(this.dbPath);
 	}
 
 	addBill(bill: Bill): void {

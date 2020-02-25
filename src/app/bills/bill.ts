@@ -1,6 +1,6 @@
 export class Bill {
 	key: string;
-	user: strinf;
+	user: string;
 	date: Date;
 	amount: number;
 	category: string;

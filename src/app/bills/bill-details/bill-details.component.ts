@@ -11,20 +11,20 @@ export class BillDetailsComponent implements OnInit {
 
 	@Input() bill: Bill;
 	
-	constructor(private billsService: BillService) { }
+	constructor(private billService: BillService) { }
 
 	ngOnInit(): void {
 	}
 
 	updateBill(bill: Bill) {
 		this.billService
-		.updateBill(this.key, bill)
+		.updateBill(this.bill.key, bill)
 		.catch(err => console.log(err));
 	}
 
 	deleteBill() {
 		this.billService
-		.deleteBill(this.key)
+		.deleteBill(this.bill.key)
 		.catch(err => console.log(err));
 	}
 

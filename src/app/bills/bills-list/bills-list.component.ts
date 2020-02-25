@@ -18,7 +18,7 @@ export class BillsListComponent implements OnInit {
 	}
 
 	getBillsList() {
-		this.billService.getBillsList().snapshot().pipe(
+		this.billService.getBillsList().snapshotChanges().pipe(
 			map(changes =>
 				changes.map(c =>
 					({key: c.payload.key, ...c.payload.val()})
@@ -28,5 +28,5 @@ export class BillsListComponent implements OnInit {
 			this.bills = bills;
 		});
 	}
-	
+
 }
