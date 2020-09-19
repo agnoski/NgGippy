@@ -27,29 +27,39 @@ export class BillsSummaryComponent implements OnInit {
 		).subscribe(bills => {
 			var monthsMap = {}
 			bills.forEach(bill => {
-			//var bill = billObject.val();
-			var billDate = new Date(bill["date"]);
-			var billDateFullYear = billDate.getFullYear();
-			var billDateMonth = billDate.getMonth();
-			var billAmount = Number(bill["amount"]);
-			//TODO: refactor this if-else chain, maybe there is a smarter solution
-			if(monthsMap[billDateFullYear] === undefined) {
-				monthsMap[billDateFullYear] = [];
-				monthsMap[billDateFullYear][billDateMonth] = {};
-				monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
-			} else if(monthsMap[billDateFullYear][billDateMonth] === undefined) {
-				monthsMap[billDateFullYear][billDateMonth] = {};
-				monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
-			} else if(monthsMap[billDateFullYear][billDateMonth][bill["category"]] === undefined) {
-				monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
-			}
-			else {
-				monthsMap[billDateFullYear][billDateMonth][bill["category"]] += billAmount;
-			}
-		})
-		console.log(monthsMap);
-			this.summary = monthsMap;
+				var billDate = new Date(bill["date"]);
+				var billDateFullYear = billDate.getFullYear();
+				var billDateMonth = billDate.getMonth();
+				var billAmount = Number(bill["amount"]);
+				//TODO: refactor this if-else chain, maybe there is a smarter solution
+				if(monthsMap[billDateFullYear] === undefined) {
+					monthsMap[billDateFullYear] = [];
+					monthsMap[billDateFullYear][billDateMonth] = {};
+					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
+				} else if(monthsMap[billDateFullYear][billDateMonth] === undefined) {
+					monthsMap[billDateFullYear][billDateMonth] = {};
+					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
+				} else if(monthsMap[billDateFullYear][billDateMonth][bill["category"]] === undefined) {
+					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
+				}
+				else {
+					monthsMap[billDateFullYear][billDateMonth][bill["category"]] += billAmount;
+				}
+			});
+			console.log(monthsMap);
+			this.summary = this.roundAmounts(monthsMap);
 		});
+	}
+
+	roundAmounts(summary: object) {
+		for(const year in summary) {
+			summary[year].forEach((month, monthIdx) => {
+				Object.keys(summary[year][monthIdx]).forEach(category => {
+					summary[year][monthIdx][category] = summary[year][monthIdx][category].toFixed(2);
+				});
+			});
+		};
+		return summary;
 	}
 
 }
