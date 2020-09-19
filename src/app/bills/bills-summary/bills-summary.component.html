@@ -1,10 +1,12 @@
 <p>bills-summary works!</p>
-<div *ngFor="let item of summary | keyvalue">
-	Years: {{item.key}}
-	<ul *ngFor="let month of item.value; index as i">
-		Month: {{i +1}}
-		<ul *ngFor="let category of month | keyvalue">
-			<li>Cat {{category.key}}: {{category.value}}</li>
+<ng-container *ngIf="summary">
+	<div *ngFor="let year of summary.years | keyvalue">
+		Year: {{year.key}} ({{year.value.total}})
+		<ul *ngFor="let month of year.value.months | keyvalue">
+			Month: {{month.key}} ({{month.value.total}})
+			<ul *ngFor="let category of month.value.categories | keyvalue">
+				<li>Cat {{category.key}}: {{category.value}}</li>
+			</ul>
 		</ul>
-	</ul>
-</div>
+	</div>
+</ng-container>

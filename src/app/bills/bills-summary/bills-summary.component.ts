@@ -25,35 +25,54 @@ export class BillsSummaryComponent implements OnInit {
 				)
 			)
 		).subscribe(bills => {
-			var monthsMap = {}
+			let monthsMap = {
+				summaryInfo: "Here you can find the data summarized :)",
+				years: {}
+			};
 			bills.forEach(bill => {
-				var billDate = new Date(bill["date"]);
-				var billDateFullYear = billDate.getFullYear();
-				var billDateMonth = billDate.getMonth();
-				var billAmount = Number(bill["amount"]);
+				const billDate = new Date(bill["date"]);
+				const billDateFullYear = billDate.getFullYear();
+				const billDateMonth = billDate.getMonth();
+				const billAmount = Number(bill["amount"]);
 				//TODO: refactor this if-else chain, maybe there is a smarter solution
-				if(monthsMap[billDateFullYear] === undefined) {
-					monthsMap[billDateFullYear] = [];
-					monthsMap[billDateFullYear][billDateMonth] = {};
-					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
-				} else if(monthsMap[billDateFullYear][billDateMonth] === undefined) {
-					monthsMap[billDateFullYear][billDateMonth] = {};
-					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
-				} else if(monthsMap[billDateFullYear][billDateMonth][bill["category"]] === undefined) {
-					monthsMap[billDateFullYear][billDateMonth][bill["category"]] = billAmount;
+				if(monthsMap.years[billDateFullYear] === undefined) {
+					monthsMap.years[billDateFullYear] = {
+						total: billAmount,
+						months: {
+							[billDateMonth]: {
+								total: billAmount,
+								categories: {
+									[bill["category"]]: billAmount
+								}
+							}
+						}
+					};
+				} else if(monthsMap.years[billDateFullYear].months[billDateMonth] === undefined) {
+					monthsMap.years[billDateFullYear].total += billAmount;
+					monthsMap.years[billDateFullYear].months[billDateMonth] = {
+						total: billAmount,
+						categories: {
+							[bill["category"]]: billAmount
+						}
+					};
+				} else if(monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] === undefined) {
+					monthsMap.years[billDateFullYear].total += billAmount;
+					monthsMap.years[billDateFullYear].months[billDateMonth].total += billAmount;
+					monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] = billAmount;
 				}
 				else {
-					monthsMap[billDateFullYear][billDateMonth][bill["category"]] += billAmount;
-				}
+					monthsMap.years[billDateFullYear].total += billAmount;
+					monthsMap.years[billDateFullYear].months[billDateMonth].total += billAmount;
+					monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
 			});
 			console.log(monthsMap);
-			this.summary = this.roundAmounts(monthsMap);
+			this.summary = monthsMap; //this.roundAmounts(monthsMap);
 		});
 	}
-
+/*
 	roundAmounts(summary: object) {
-		for(const year in summary) {
-			summary[year].forEach((month, monthIdx) => {
+		Object.keys(summary).forEach(year => {
+			Object.keys(summary[year]).forEach((month, monthIdx) => {
 				Object.keys(summary[year][monthIdx]).forEach(category => {
 					summary[year][monthIdx][category] = summary[year][monthIdx][category].toFixed(2);
 				});
@@ -61,5 +80,5 @@ export class BillsSummaryComponent implements OnInit {
 		};
 		return summary;
 	}
-
+*/
 }
