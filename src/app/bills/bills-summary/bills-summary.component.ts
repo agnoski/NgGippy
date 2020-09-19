@@ -2,6 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { BillService } from '../bill.service';
 import { map } from 'rxjs/operators';
 
+interface Summary {
+	info: string,
+	years: {
+		[key: string]: {
+			total: number,
+			months: {
+				[key: string]: {
+					total: number,
+					categories: {
+						[key: string]: number 
+					}
+				}
+			}
+		}
+	}
+}
+
 @Component({
   selector: 'app-bills-summary',
   templateUrl: './bills-summary.component.html',
@@ -9,7 +26,7 @@ import { map } from 'rxjs/operators';
 })
 export class BillsSummaryComponent implements OnInit {
 
-	summary: any;
+	summary: Summary;
 
 	constructor(private billService: BillService) { }
 
@@ -26,7 +43,7 @@ export class BillsSummaryComponent implements OnInit {
 			)
 		).subscribe(bills => {
 			let monthsMap = {
-				summaryInfo: "Here you can find the data summarized :)",
+				info: "Here you can find the data summarized :)",
 				years: {}
 			};
 			bills.forEach(bill => {
@@ -66,19 +83,22 @@ export class BillsSummaryComponent implements OnInit {
 					monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
 			});
 			console.log(monthsMap);
-			this.summary = monthsMap; //this.roundAmounts(monthsMap);
+			this.summary = this.roundAmounts(monthsMap);
 		});
 	}
-/*
-	roundAmounts(summary: object) {
-		Object.keys(summary).forEach(year => {
-			Object.keys(summary[year]).forEach((month, monthIdx) => {
-				Object.keys(summary[year][monthIdx]).forEach(category => {
-					summary[year][monthIdx][category] = summary[year][monthIdx][category].toFixed(2);
-				});
-			});
-		};
+
+	roundAmounts(summary: Summary) {
+		for(const year in summary.years) {
+			summary.years[year].total = Number(summary.years[year].total.toFixed(2));
+			for(const month in summary.years[year].months) {
+				summary.years[year].months[month].total = Number(summary.years[year].months[month].total.toFixed(2));
+				for(const category in summary.years[year].months[month].categories) {
+					let categoryRoundAmount = Number(summary.years[year].months[month].categories[category].toFixed(2));
+					summary.years[year].months[month].categories[category]  = categoryRoundAmount;
+				}
+			}
+		}
 		return summary;
 	}
-*/
+
 }
