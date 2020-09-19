@@ -1,37 +1,37 @@
 <p>bill-form works!</p>
 
 <form (ngSubmit)="onSubmit()">
-	<div>
-		<label for="user">User</label>
+	<div class="form-input">
+		<label for="user">User: </label>
 		<input type="text" id="user" required [(ngModel)]="bill.user" name="user">
 	</div>
 
-	<div>
-		<label for="date">Date</label>
+	<div class="form-input">
+		<label for="date">Date: </label>
 		<input type="date" id="date" required [(ngModel)]="bill.date" name="date">
 	</div>
 
-	<div>
-		<label for="amount">Amount</label>
+	<div class="form-input">
+		<label for="amount">Amount: </label>
 		<input type="number" id="amount" required [(ngModel)]="bill.amount" name="amount">
 	</div>
 
-	<div>
-		<label for="category">Category</label>
+	<div class="form-input">
+		<label for="category">Category: </label>
 		<input type="text" id="category" required [(ngModel)]="bill.category" name="category">
 	</div>
 
-	<div>
-		<label for="shop">Shop</label>
+	<div class="form-input">
+		<label for="shop">Shop: </label>
 		<input type="text" id="shop" required [(ngModel)]="bill.shop" name="shop">
 	</div>
 
-	<div>
-		<label for="recurrent">Recurrent</label>
+	<div class="form-input">
+		<label for="recurrent">Recurrent: </label>
 		<input type="text" id="recurrent" required [(ngModel)]="bill.recurrent" name="recurrent">
 	</div>
 
-	<button type="submit">Submit</button>
+	<button class="form-submit" type="submit">Submit</button>
 </form>
 
-<button (click)="newBill()">Add</button>
+<button class="form-submit" (click)="newBill()">Add</button>
