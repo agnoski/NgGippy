@@ -42,7 +42,7 @@ export class BillsSummaryComponent implements OnInit {
 				)
 			)
 		).subscribe(bills => {
-			let monthsMap = {
+			let tmpSummary = {
 				info: "Here you can find the data summarized :)",
 				years: {}
 			};
@@ -52,8 +52,8 @@ export class BillsSummaryComponent implements OnInit {
 				const billDateMonth = billDate.getMonth();
 				const billAmount = Number(bill["amount"]);
 				//TODO: refactor this if-else chain, maybe there is a smarter solution
-				if(monthsMap.years[billDateFullYear] === undefined) {
-					monthsMap.years[billDateFullYear] = {
+				if(tmpSummary.years[billDateFullYear] === undefined) {
+					tmpSummary.years[billDateFullYear] = {
 						total: billAmount,
 						months: {
 							[billDateMonth]: {
@@ -64,26 +64,26 @@ export class BillsSummaryComponent implements OnInit {
 							}
 						}
 					};
-				} else if(monthsMap.years[billDateFullYear].months[billDateMonth] === undefined) {
-					monthsMap.years[billDateFullYear].total += billAmount;
-					monthsMap.years[billDateFullYear].months[billDateMonth] = {
+				} else if(tmpSummary.years[billDateFullYear].months[billDateMonth] === undefined) {
+					tmpSummary.years[billDateFullYear].total += billAmount;
+					tmpSummary.years[billDateFullYear].months[billDateMonth] = {
 						total: billAmount,
 						categories: {
 							[bill["category"]]: billAmount
 						}
 					};
-				} else if(monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] === undefined) {
-					monthsMap.years[billDateFullYear].total += billAmount;
-					monthsMap.years[billDateFullYear].months[billDateMonth].total += billAmount;
-					monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] = billAmount;
+				} else if(tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] === undefined) {
+					tmpSummary.years[billDateFullYear].total += billAmount;
+					tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
+					tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] = billAmount;
 				}
 				else {
-					monthsMap.years[billDateFullYear].total += billAmount;
-					monthsMap.years[billDateFullYear].months[billDateMonth].total += billAmount;
-					monthsMap.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
+					tmpSummary.years[billDateFullYear].total += billAmount;
+					tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
+					tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
 			});
-			console.log(monthsMap);
-			this.summary = this.roundAmounts(monthsMap);
+			console.log(tmpSummary);
+			this.summary = this.roundAmounts(tmpSummary);
 		});
 	}
 
