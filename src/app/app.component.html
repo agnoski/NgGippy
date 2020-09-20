@@ -10,10 +10,16 @@
 <div class="content" role="main">
   <span>{{ title }} app is running!</span>
 
-  <div class="sections">
+  <div class="content" fxLayout="row wrap">
+    <div fxFlex="33%" fxFlex.xs="100%">
       <app-bill-form></app-bill-form>
+    </div>
+    <div fxFlex="33%" fxFlex.xs="100%">
       <app-bills-list></app-bills-list>
+    </div>
+    <div fxFlex="33%" fxFlex.xs="100%">
       <app-bills-summary></app-bills-summary>
+    </div>
   </div>
 </div>
 

@@ -15,6 +15,8 @@ import { BillFormComponent } from './bills/bill-form/bill-form.component';
 import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
