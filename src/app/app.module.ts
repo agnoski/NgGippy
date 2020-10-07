@@ -13,6 +13,7 @@ import { BillDetailsComponent } from './bills/bill-details/bill-details.componen
 import { BillsListComponent } from './bills/bills-list/bills-list.component';
 import { BillFormComponent } from './bills/bill-form/bill-form.component';
 import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.compo
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
-    AppRoutingModule
+    AppRoutingModule, NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
