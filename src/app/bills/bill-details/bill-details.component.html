@@ -1,12 +1,14 @@
- <div *ngIf="bill" class="card">
-	<div class="card-header">
-		<span class="card-shop">{{bill.shop}} </span> <span class="card-category">#{{bill.category}}</span>
-	</div>
-	<div class="card-content">
-		<span class="card-amount">{{bill.amount}}€</span>
-	</div>
-	<div class="card-footer">
-		<span class="card-user">@{{bill.user}}</span> // <span class="card-date">{{bill.date}}</span> // <span (click)='deleteBill()'>Del</span>
-	</div>
-	<!-- <button (click)='deleteBill()'>Delete</button>-->
+<div *ngIf="bill" class="card mb-3">
+  <div class="card-header">
+    <span class="card-shop">{{bill.shop}} </span> <span class="card-category">#{{bill.category}}</span>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <span class="card-amount">{{bill.amount}}€</span>
+    </p>
+  </div>
+  <div class="card-footer text-muted text-right">
+    <span class="card-user">@{{bill.user}}</span> // <span class="card-date">{{bill.date}}</span> // <span (click)='deleteBill()'>Del</span>
+  </div>
+  <!-- <button (click)='deleteBill()'>Delete</button>-->
 </div>
