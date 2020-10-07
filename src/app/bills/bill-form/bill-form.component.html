@@ -1,5 +1,29 @@
 <p>bill-form works!</p>
-
+<mat-form-field appearance="fill">
+    <mat-label>User</mat-label>
+	<input matInput>
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+	<input matInput type="date" >
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>Amount</mat-label>
+	<input matInput type="number" id="amount">
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+	<input matInput>
+</mat-form-field>
+<br>
+<mat-form-field appearance="fill">
+    <mat-label>Shop</mat-label>
+	<input matInput>
+</mat-form-field>
+<br>
 <form (ngSubmit)="onSubmit()">
 	<div class="form-input">
 		<label for="user">User: </label>

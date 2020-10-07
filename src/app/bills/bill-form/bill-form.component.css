@@ -5,3 +5,7 @@
 .form-submit {
     margin: 8px;
 }
+
+.mat-form-field {
+    width: 100%;
+}
