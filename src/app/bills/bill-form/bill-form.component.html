@@ -1,37 +1,36 @@
 <p>bill-form works!</p>
 
 <form (ngSubmit)="onSubmit()">
-	<div class="form-input">
-		<label for="user">User: </label>
-		<input type="text" id="user" required [(ngModel)]="bill.user" name="user">
-	</div>
+  <div class="form-group">
+    <label for="user">User: </label>
+    <input type="text" id="user" class="form-control" required [(ngModel)]="bill.user" name="user">
+  </div>
 
-	<div class="form-input">
-		<label for="date">Date: </label>
-		<input type="date" id="date" required [(ngModel)]="bill.date" name="date">
-	</div>
+  <div class="form-group">
+    <label for="date">Date: </label>
+    <input type="date" id="date" class="form-control" required [(ngModel)]="bill.date" name="date">
+  </div>
 
-	<div class="form-input">
-		<label for="amount">Amount: </label>
-		<input type="number" id="amount" required [(ngModel)]="bill.amount" name="amount">
-	</div>
+  <div class="form-group">
+    <label for="amount">Amount: </label>
+    <input type="number" id="amount" class="form-control" required [(ngModel)]="bill.amount" name="amount">
+  </div>
 
-	<div class="form-input">
-		<label for="category">Category: </label>
-		<input type="text" id="category" required [(ngModel)]="bill.category" name="category">
-	</div>
+  <div class="form-group">
+    <label for="category">Category: </label>
+    <input type="text" id="category" class="form-control" required [(ngModel)]="bill.category" name="category">
+  </div>
 
-	<div class="form-input">
-		<label for="shop">Shop: </label>
-		<input type="text" id="shop" required [(ngModel)]="bill.shop" name="shop">
-	</div>
+  <div class="form-group">
+    <label for="shop">Shop: </label>
+    <input type="text" id="shop" class="form-control" required [(ngModel)]="bill.shop" name="shop">
+  </div>
 
-	<div class="form-input">
-		<label for="recurrent">Recurrent: </label>
-		<input type="text" id="recurrent" required [(ngModel)]="bill.recurrent" name="recurrent">
-	</div>
+  <div class="form-group">
+    <label for="recurrent">Recurrent: </label>
+    <input type="text" id="recurrent" class="form-control" required [(ngModel)]="bill.recurrent" name="recurrent">
+  </div>
 
-	<button class="form-submit" type="submit">Submit</button>
 </form>
 
-<button class="form-submit" (click)="newBill()">Add</button>
+<button class="btn btn-primary" (click)="newBill()">Submit</button>
