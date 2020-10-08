@@ -8,8 +8,10 @@
       <div class="card-header">
         Month {{month.key}} ({{month.value.total}})
       </div>
-      <ul class="list-group list-group-flush" *ngFor="let category of month.value.categories | keyvalue">
-        <li class="list-group-item">{{category.key}} {{category.value}}</li>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let category of month.value.categories | keyvalue">
+          {{category.key}} {{category.value}}
+	</li>
       </ul>
     </div>
   </div>
