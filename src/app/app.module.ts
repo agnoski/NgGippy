@@ -14,6 +14,7 @@ import { BillsListComponent } from './bills/bills-list/bills-list.component';
 import { BillFormComponent } from './bills/bill-form/bill-form.component';
 import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BillDetailsComponent,
     BillsListComponent,
     BillFormComponent,
-    BillsSummaryComponent
+    BillsSummaryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
