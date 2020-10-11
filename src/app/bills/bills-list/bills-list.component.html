@@ -1,4 +1,4 @@
 <p>bills-list works!</p>
-<div *ngFor="let bill of bills">
+<div *ngFor="let bill of bills | reverse">
 	<app-bill-details [bill]='bill'></app-bill-details>
 </div>
