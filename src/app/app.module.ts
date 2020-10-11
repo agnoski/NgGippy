@@ -16,6 +16,7 @@ import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { BillsHomeComponent } from './bills/bills-home/bills-home.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BillsHomeComponent } from './bills/bills-home/bills-home.component';
     BillFormComponent,
     BillsSummaryComponent,
     LoginComponent,
-    BillsHomeComponent
+    BillsHomeComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
