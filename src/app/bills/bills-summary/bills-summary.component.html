@@ -6,7 +6,7 @@
     </div>
     <div class="card mb-3" *ngFor="let month of year.value.months | keyvalue | reverse">
       <div class="card-header">
-        <span class="h6">{{month.value.name}}</span><span class="h6 text-info float-right">{{month.value.total | currency:'EUR':''}}€</span>
+        <span class="h6">{{month.value.name | titlecase}}</span><span class="h6 text-info float-right">{{month.value.total | currency:'EUR':''}}€</span>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let category of month.value.categories | keyvalue">
