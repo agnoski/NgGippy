@@ -1,7 +1,7 @@
 <div *ngIf="bill">
   <div class="shadow-sm pt-3 pr-3 pb-1 pl-3 mb-3 bg-white rounded">
     <div class="mb-0">
-      <span class="h6">#{{bill.category}}</span><span class="h5 text-info float-right">{{bill.amount}}€</span>
+      <span class="h6">#{{bill.category}}</span><span class="h5 text-info float-right">{{bill.amount | currency:display:''}}€</span>
     </div>
     <div>
       <small class="text-muted">({{bill.shop}})</small>
