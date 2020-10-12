@@ -9,6 +9,7 @@ interface Summary {
 			total: number,
 			months: {
 				[key: string]: {
+					name: string,
 					total: number,
 					categories: {
 						[key: string]: number 
@@ -50,6 +51,7 @@ export class BillsSummaryComponent implements OnInit {
 				const billDate = new Date(bill["date"]);
 				const billDateFullYear = billDate.getFullYear();
 				const billDateMonth = billDate.getMonth();
+				const billDateMonthName = billDate.toLocaleString('default', { month: 'long' });
 				const billAmount = Number(bill["amount"]);
 				//TODO: refactor this if-else chain, maybe there is a smarter solution
 				if(tmpSummary.years[billDateFullYear] === undefined) {
@@ -57,6 +59,7 @@ export class BillsSummaryComponent implements OnInit {
 						total: billAmount,
 						months: {
 							[billDateMonth]: {
+								name: billDateMonthName,
 								total: billAmount,
 								categories: {
 									[bill["category"]]: billAmount
@@ -67,6 +70,7 @@ export class BillsSummaryComponent implements OnInit {
 				} else if(tmpSummary.years[billDateFullYear].months[billDateMonth] === undefined) {
 					tmpSummary.years[billDateFullYear].total += billAmount;
 					tmpSummary.years[billDateFullYear].months[billDateMonth] = {
+						name: billDateMonthName,
 						total: billAmount,
 						categories: {
 							[bill["category"]]: billAmount
