@@ -2,15 +2,15 @@
 <ng-container *ngIf="summary">
   <div *ngFor="let year of summary.years | keyvalue | reverse">
     <div class="shadow-sm p-3 mb-3 bg-white rounded">
-      <span class="h6">Year {{year.key}}</span><span class="h6 text-info float-right">{{year.value.total | currency:display:''}}€</span>
+      <span class="h6">Year {{year.key}}</span><span class="h6 text-info float-right">{{year.value.total | currency:'EUR':''}}€</span>
     </div>
     <div class="card mb-3" *ngFor="let month of year.value.months | keyvalue | reverse">
       <div class="card-header">
-        <span class="h6">{{month.value.name}}</span><span class="h6 text-info float-right">{{month.value.total | currency:display:''}}€</span>
+        <span class="h6">{{month.value.name}}</span><span class="h6 text-info float-right">{{month.value.total | currency:'EUR':''}}€</span>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let category of month.value.categories | keyvalue">
-          <span>{{category.key}}</span><span class="text-info float-right">{{category.value | currency:display:''}}€</span>
+          <span>{{category.key}}</span><span class="text-info float-right">{{category.value | currency:'EUR':''}}€</span>
         </li>
       </ul>
     </div>
