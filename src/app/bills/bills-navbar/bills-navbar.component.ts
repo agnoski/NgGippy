@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillsNavbarComponent implements OnInit {
 
+  title = "Gippy";
+  isCollapsed = true;
+
   constructor() { }
 
   ngOnInit(): void {
