@@ -87,22 +87,8 @@ export class BillsSummaryComponent implements OnInit {
 					tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
 			});
 			console.log(tmpSummary);
-			this.summary = this.roundAmounts(tmpSummary);
+			this.summary = tmpSummary;
 		});
-	}
-
-	roundAmounts(summary: Summary) {
-		for(const year in summary.years) {
-			summary.years[year].total = Number(summary.years[year].total.toFixed(2));
-			for(const month in summary.years[year].months) {
-				summary.years[year].months[month].total = Number(summary.years[year].months[month].total.toFixed(2));
-				for(const category in summary.years[year].months[month].categories) {
-					let categoryRoundAmount = Number(summary.years[year].months[month].categories[category].toFixed(2));
-					summary.years[year].months[month].categories[category]  = categoryRoundAmount;
-				}
-			}
-		}
-		return summary;
 	}
 
 }
