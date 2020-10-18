@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Bill } from '../bill';
 import { BillService } from '../bill.service';
 
@@ -10,27 +10,34 @@ import { BillService } from '../bill.service';
 })
 export class BillFormComponent implements OnInit {
 
-	bill: Bill = new Bill();
-	submitted = false;
+  billForm: FormGroup;
 
-	constructor(private billService: BillService) { }
+  constructor(private billService: BillService, private formBuilder: FormBuilder) {
+    this.billForm = this.formBuilder.group({
+      user: ['', Validators.required],
+      date: ['', Validators.required],
+      amount: ['', Validators.required],
+      category: ['', Validators.required],
+      shop: ['', Validators.required],
+      recurrent: ['n', Validators.required],
+    });
+  }
 
-	ngOnInit(): void {
-	}
+  ngOnInit(): void {
+  }
 
-	newBill(): void {
-		this.submitted = false;
-		this.bill = new Bill();
-	}
+  addBill(bill: Bill): void {
+    this.billService.addBill(bill);
+  }
 
-	addBill(): void {
-		this.billService.addBill(this.bill);
-		this.bill = new Bill();
-	}
+  resetForm(): void {
+    this.billForm.reset();
+  }
 
-	onSubmit() {
-		this.submitted = true;
-		this.addBill();
-	}
+  onSubmit(formData) {
+    const bill: Bill = Object.assign(new Bill(), formData)
+    console.log(bill);
+    this.addBill(bill);
+  }
 
 }
