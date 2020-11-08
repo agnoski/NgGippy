@@ -16,7 +16,7 @@ export class BillFormComponent implements OnInit {
   constructor(private billService: BillService, private formBuilder: FormBuilder, private authService: AuthService) {
     this.billForm = this.formBuilder.group({
       user: [this.authService.getLoginData().user, Validators.required],
-      date: ['', Validators.required],
+      date: [new Date().toISOString().substring(0,10), Validators.required],
       amount: ['', Validators.required],
       category: ['', Validators.required],
       shop: ['', Validators.required],
