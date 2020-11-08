@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Bill } from '../bill';
 import { BillService } from '../bill.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-bill-form',
@@ -12,9 +13,9 @@ export class BillFormComponent implements OnInit {
 
   billForm: FormGroup;
 
-  constructor(private billService: BillService, private formBuilder: FormBuilder) {
+  constructor(private billService: BillService, private formBuilder: FormBuilder, private authService: AuthService) {
     this.billForm = this.formBuilder.group({
-      user: ['', Validators.required],
+      user: [this.authService.getLoginData().user, Validators.required],
       date: ['', Validators.required],
       amount: ['', Validators.required],
       category: ['', Validators.required],
