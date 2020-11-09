@@ -9,22 +9,32 @@ import { map } from 'rxjs/operators';
 })
 export class BillsListComponent implements OnInit {
 
-	bills: any;
-	billsFiltered: any;
-  funcList: any;
+  bills: any;
+  billsFiltered: any;
+  webWorker: Worker;
 
-	constructor(private billService: BillService) {
-    this.funcList = {
-      "@": (bill, user) => bill.user === user,
-      "#": (bill, category) => bill.category === category,
-      ":": (bill, shop) => bill.shop === shop,
-      "/": (bill, date) => bill.date === date
-    }
-  }
+  constructor(private billService: BillService) {}
 
 	ngOnInit(): void {
 		this.getBillsList();
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      this.webWorker = new Worker('../../web-workers/bills-filter.worker', { type: 'module' });
+      this.webWorker.onmessage = ({ data }) => {
+        console.log(`page got message: ${data}`);
+        this.billsFiltered = data;
+      };
+    } else {
+      // Web workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+      console.log("Web workers not supported...");
+    }
+
 	}
+
+  ngOnDestroy() {
+    this.webWorker.terminate();
+  }
 
 	getBillsList() {
 		this.billService.getBillsList().snapshotChanges().pipe(
@@ -42,25 +52,7 @@ export class BillsListComponent implements OnInit {
   onFilter(event) {
     const str = event.target.value;
     console.log(str);
-
-    // parse space
-    const tokens = str.split(" ");
-
-    // take first caracter
-    // map to a list of filter functions
-    const filtFun = tokens.filter(token => token.length > 1).map(token => {
-      return {func: this.funcList[token[0]], arg: token.slice(1)};
-    });
-
-    // apply filters
-    let billsLocal = this.bills.filter(bill => true); // copy
-    filtFun.forEach(filt => {
-      if(filt.func) {
-        billsLocal = billsLocal.filter(bill => filt.func(bill, filt.arg)); 
-      }
-    });
-
-    this.billsFiltered = billsLocal;
+    this.webWorker.postMessage({str: str, bills: this.bills});
   }
 
 }
