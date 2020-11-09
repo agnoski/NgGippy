@@ -63,8 +63,4 @@ export class BillsListComponent implements OnInit {
     this.billsFiltered = billsLocal;
   }
 
-  filterByCategory(category) {
-    this.billsFiltered = this.bills.filter(bill => category === "" ? true : bill.category === category);
-  }
-
 }
