@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BillService } from '../bill.service';
+import { BillsFilterService } from '../../services/bills-filter.service';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -11,30 +12,15 @@ export class BillsListComponent implements OnInit {
 
   bills: any;
   billsFiltered: any;
-  webWorker: Worker;
 
-  constructor(private billService: BillService) {}
+  constructor(private billService: BillService, private billsFilterService: BillsFilterService) {}
 
 	ngOnInit(): void {
 		this.getBillsList();
-    if (typeof Worker !== 'undefined') {
-      // Create a new
-      this.webWorker = new Worker('../../web-workers/bills-filter.worker', { type: 'module' });
-      this.webWorker.onmessage = ({ data }) => {
-        console.log(`page got message: ${data}`);
-        this.billsFiltered = data;
-      };
-    } else {
-      // Web workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
-      console.log("Web workers not supported...");
-    }
-
+    this.billsFilterService.filteredBills.subscribe(bills => {
+      this.billsFiltered = bills
+    });
 	}
-
-  ngOnDestroy() {
-    this.webWorker.terminate();
-  }
 
 	getBillsList() {
 		this.billService.getBillsList().snapshotChanges().pipe(
@@ -50,9 +36,8 @@ export class BillsListComponent implements OnInit {
 	}
 
   onFilter(event) {
-    const str = event.target.value;
-    console.log(str);
-    this.webWorker.postMessage({str: str, bills: this.bills});
+    const input = event.target.value;
+    this.billsFilterService.filterBills(this.bills, input);
   }
 
 }
