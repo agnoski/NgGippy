@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BillService } from '../bill.service';
+import { BillsFilterService } from '../../services/bills-filter.service';
 import { map } from 'rxjs/operators';
 
 interface Summary {
@@ -28,11 +29,15 @@ interface Summary {
 export class BillsSummaryComponent implements OnInit {
 
 	summary: Summary;
+  bills: any[];
 
-	constructor(private billService: BillService) { }
+	constructor(private billService: BillService, private billsFilterService: BillsFilterService) { }
 
 	ngOnInit(): void {
 		this.getSummary();
+    this.billsFilterService.filteredBills.subscribe(bills => {
+      this.setSummary(bills);
+    });
 	}
 
 	getSummary() {
@@ -43,52 +48,63 @@ export class BillsSummaryComponent implements OnInit {
 				)
 			)
 		).subscribe(bills => {
-			let tmpSummary = {
-				info: "Here you can find the data summarized :)",
-				years: {}
-			};
-			bills.forEach(bill => {
-				const billDate = new Date(bill["date"]);
-				const billDateFullYear = billDate.getFullYear();
-				const billDateMonth = billDate.getMonth();
-				const billDateMonthName = billDate.toLocaleString('default', { month: 'long' });
-				const billAmount = Number(bill["amount"]);
-				//TODO: refactor this if-else chain, maybe there is a smarter solution
-				if(tmpSummary.years[billDateFullYear] === undefined) {
-					tmpSummary.years[billDateFullYear] = {
-						total: billAmount,
-						months: {
-							[billDateMonth]: {
-								name: billDateMonthName,
-								total: billAmount,
-								categories: {
-									[bill["category"]]: billAmount
-								}
-							}
-						}
-					};
-				} else if(tmpSummary.years[billDateFullYear].months[billDateMonth] === undefined) {
-					tmpSummary.years[billDateFullYear].total += billAmount;
-					tmpSummary.years[billDateFullYear].months[billDateMonth] = {
-						name: billDateMonthName,
-						total: billAmount,
-						categories: {
-							[bill["category"]]: billAmount
-						}
-					};
-				} else if(tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] === undefined) {
-					tmpSummary.years[billDateFullYear].total += billAmount;
-					tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
-					tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] = billAmount;
-				}
-				else {
-					tmpSummary.years[billDateFullYear].total += billAmount;
-					tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
-					tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
-			});
-			console.log(tmpSummary);
-			this.summary = tmpSummary;
+      this.bills = bills;
+      this.setSummary(bills);
 		});
 	}
+
+  setSummary(bills): void {
+    const tmpSummary = {
+      info: "Here you can find the data summarized :)",
+      years: {}
+    };
+
+    bills.forEach(bill => {
+      const billDate = new Date(bill["date"]);
+      const billDateFullYear = billDate.getFullYear();
+      const billDateMonth = billDate.getMonth();
+      const billDateMonthName = billDate.toLocaleString('default', { month: 'long' });
+      const billAmount = Number(bill["amount"]);
+      //TODO: refactor this if-else chain, maybe there is a smarter solution
+      if(tmpSummary.years[billDateFullYear] === undefined) {
+        tmpSummary.years[billDateFullYear] = {
+          total: billAmount,
+          months: {
+            [billDateMonth]: {
+              name: billDateMonthName,
+              total: billAmount,
+              categories: {
+                [bill["category"]]: billAmount
+              }
+            }
+          }
+        };
+      } else if(tmpSummary.years[billDateFullYear].months[billDateMonth] === undefined) {
+        tmpSummary.years[billDateFullYear].total += billAmount;
+        tmpSummary.years[billDateFullYear].months[billDateMonth] = {
+          name: billDateMonthName,
+          total: billAmount,
+          categories: {
+            [bill["category"]]: billAmount
+          }
+        };
+      } else if(tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] === undefined) {
+        tmpSummary.years[billDateFullYear].total += billAmount;
+        tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
+        tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] = billAmount;
+      }
+      else {
+        tmpSummary.years[billDateFullYear].total += billAmount;
+        tmpSummary.years[billDateFullYear].months[billDateMonth].total += billAmount;
+        tmpSummary.years[billDateFullYear].months[billDateMonth].categories[bill["category"]] += billAmount;				}
+    });
+
+    this.summary = tmpSummary;
+  }
+
+  onFilter(event) {
+    const input = event.target.value;
+    this.billsFilterService.filterBills(this.bills, input);
+  }
 
 }
