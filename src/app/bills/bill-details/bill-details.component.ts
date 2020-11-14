@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BillService } from '../bill.service';
 import { Bill } from '../bill'
 
@@ -11,7 +12,7 @@ export class BillDetailsComponent implements OnInit {
 
 	@Input() bill: Bill;
 	
-	constructor(private billService: BillService) { }
+	constructor(private billService: BillService, private modalService: NgbModal) { }
 
 	ngOnInit(): void {
 	}
@@ -27,5 +28,14 @@ export class BillDetailsComponent implements OnInit {
 		.deleteBill(this.bill.key)
 		.catch(err => console.log(err));
 	}
+
+  openEditModal(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result
+      .then((result) => {
+        console.log(`Closed with: ${result}`);
+      }, (reason) => {
+      console.log(`Closed with: ${reason}`);
+    });
+  }
 
 }
