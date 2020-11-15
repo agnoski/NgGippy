@@ -14,11 +14,13 @@ export class BillFormComponent implements OnInit {
   @Input() bill: Bill;
 
   billForm: FormGroup;
+  submitButtonText: string;
 
   constructor(private billService: BillService, private formBuilder: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     if(this.bill) {
+      this.submitButtonText = "Update";
       this.billForm = this.formBuilder.group({
         user: [this.bill.user, Validators.required],
         date: [this.bill.date, Validators.required],
@@ -29,6 +31,7 @@ export class BillFormComponent implements OnInit {
       });
       console.log("Bill received from form onInit: ", this.bill);
     } else {
+      this.submitButtonText = "Add";
       this.billForm = this.formBuilder.group({
         user: [this.authService.getLoginData().user, Validators.required],
         date: [new Date().toISOString().substring(0,10), Validators.required],
