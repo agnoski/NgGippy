@@ -1,4 +1,4 @@
-<div *ngIf="bill">
+<ng-container *ngIf="bill">
   <div class="shadow-sm pt-3 pr-3 pb-1 pl-3 mb-3 bg-light rounded">
     <div class="mb-0">
       <span class="h6">#{{bill.category}}</span><span class="h5 text-info float-right">{{bill.amount | currency:'EUR':''}}€</span>
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div> 
-</div>
+</ng-container>
 
 <!-- Modal -->
 <ng-template #editModal let-modal>
