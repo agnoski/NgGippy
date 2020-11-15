@@ -1,5 +1,8 @@
 <div class="input-group mb-3">
-  <input class="w-100" type="text" placeholder="Filter: @user, #category, :shop /date<>range" (keyup)="onFilter($event)">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="material-icons-outlined md-18">search</i></span>
+  </div>
+  <input class="form-control bg-light" type="text" placeholder="@user #category :shop /date" (keyup)="onFilter($event)">
 </div>
 
 <ng-container *ngIf="summary">
