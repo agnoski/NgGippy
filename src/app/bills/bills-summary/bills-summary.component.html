@@ -6,11 +6,11 @@
     <input class="form-control bg-light" type="text" placeholder="@user #category :shop /date" (keyup)="onFilter($event)">
   </div>
 
-  <div *ngFor="let year of summary.years | keyvalue | reverse">
+  <div *ngFor="let year of summary.years | keyvalue: desc">
     <div class="shadow-sm p-3 mb-3 bg-white rounded">
       <span class="h6">Year {{year.key}}</span><span class="h6 text-info float-right">{{year.value.total | currency:'EUR':''}}€</span>
     </div>
-    <div class="card mb-3" *ngFor="let month of year.value.months | keyvalue | reverse">
+    <div class="card mb-3" *ngFor="let month of year.value.months | keyvalue: desc">
       <div class="card-header">
         <span class="h6">{{month.value.name | titlecase}}</span><span class="h6 text-info float-right">{{month.value.total | currency:'EUR':''}}€</span>
       </div>

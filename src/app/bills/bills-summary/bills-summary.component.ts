@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeyValue } from '@angular/common';
 import { BillService } from '../bill.service';
 import { BillsFilterService } from '../../services/bills-filter.service';
 import { map } from 'rxjs/operators';
@@ -6,10 +7,10 @@ import { map } from 'rxjs/operators';
 interface Summary {
 	info: string,
 	years: {
-		[key: string]: {
+		[key: number]: {
 			total: number,
 			months: {
-				[key: string]: {
+				[key: number]: {
 					name: string,
 					total: number,
 					categories: {
@@ -105,6 +106,10 @@ export class BillsSummaryComponent implements OnInit {
   onFilter(event) {
     const input = event.target.value;
     this.billsFilterService.filterBills(this.bills, input);
+  }
+
+  desc(a: KeyValue<number, any>, b: KeyValue<number, any>): number {
+    return b.key - a.key;
   }
 
 }
