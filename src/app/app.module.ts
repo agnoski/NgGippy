@@ -9,16 +9,16 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from '../environments/environment';
-import { BillDetailsComponent } from './bills/bill-details/bill-details.component';
-import { BillsListComponent } from './bills/bills-list/bills-list.component';
-import { BillFormComponent } from './bills/bill-form/bill-form.component';
-import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.component';
+import { BillDetailsComponent } from './components/bill-details/bill-details.component';
+import { BillsListComponent } from './components/bills-list/bills-list.component';
+import { BillFormComponent } from './components/bill-form/bill-form.component';
+import { BillsSummaryComponent } from './components/bills-summary/bills-summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
-import { BillsHomeComponent } from './bills/bills-home/bills-home.component';
+import { BillsHomeComponent } from './components/bills-home/bills-home.component';
 import { ReversePipe } from './pipes/reverse.pipe';
-import { BillsNavbarComponent } from './bills/bills-navbar/bills-navbar.component';
-import { BillsLoadingComponent } from './bills/bills-loading/bills-loading.component';
+import { BillsNavbarComponent } from './components/bills-navbar/bills-navbar.component';
+import { BillsLoadingComponent } from './components/bills-loading/bills-loading.component';
 
 @NgModule({
   declarations: [

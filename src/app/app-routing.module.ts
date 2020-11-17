@@ -1,8 +1,8 @@
 import { LoginComponent } from './login/login.component';
-import { BillsHomeComponent } from './bills/bills-home/bills-home.component';
-import { BillFormComponent } from './bills/bill-form/bill-form.component';
-import { BillsListComponent } from './bills/bills-list/bills-list.component';
-import { BillsSummaryComponent } from './bills/bills-summary/bills-summary.component';
+import { BillsHomeComponent } from './components/bills-home/bills-home.component';
+import { BillFormComponent } from './components/bill-form/bill-form.component';
+import { BillsListComponent } from './components/bills-list/bills-list.component';
+import { BillsSummaryComponent } from './components/bills-summary/bills-summary.component';
 import { AuthGuard } from './guards/auth.guard';
 
 import { NgModule } from '@angular/core';
