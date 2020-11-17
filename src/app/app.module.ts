@@ -16,7 +16,7 @@ import { BillsSummaryComponent } from './components/bills-summary/bills-summary.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { BillsHomeComponent } from './components/bills-home/bills-home.component';
-import { ReversePipe } from './pipes/reverse.pipe';
+import { ReversePipe } from './pipes/reverse/reverse.pipe';
 import { BillsNavbarComponent } from './components/bills-navbar/bills-navbar.component';
 import { BillsLoadingComponent } from './components/bills-loading/bills-loading.component';
 
