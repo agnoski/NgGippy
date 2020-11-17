@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Bill } from '../bill';
+import { Bill } from './../../classes/bill/bill';
 import { BillService } from './../../services/bill/bill.service';
 import { AuthService } from './../../services/auth/auth.service';
 

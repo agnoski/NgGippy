@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BillService } from './../../services/bill/bill.service';
-import { Bill } from '../bill'
+import { Bill } from './../../classes/bill/bill'
 
 @Component({
   selector: 'app-bill-details',
