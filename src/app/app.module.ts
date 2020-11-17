@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { BillsHomeComponent } from './bills/bills-home/bills-home.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { BillsNavbarComponent } from './bills/bills-navbar/bills-navbar.component';
+import { BillsLoadingComponent } from './bills/bills-loading/bills-loading.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BillsNavbarComponent } from './bills/bills-navbar/bills-navbar.componen
     LoginComponent,
     BillsHomeComponent,
     ReversePipe,
-    BillsNavbarComponent
+    BillsNavbarComponent,
+    BillsLoadingComponent
   ],
   imports: [
     BrowserModule,
