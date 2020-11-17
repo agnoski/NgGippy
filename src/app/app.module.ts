@@ -14,7 +14,7 @@ import { BillsListComponent } from './components/bills-list/bills-list.component
 import { BillFormComponent } from './components/bill-form/bill-form.component';
 import { BillsSummaryComponent } from './components/bills-summary/bills-summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { BillsHomeComponent } from './components/bills-home/bills-home.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { BillsNavbarComponent } from './components/bills-navbar/bills-navbar.component';

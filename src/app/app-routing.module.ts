@@ -1,4 +1,4 @@
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { BillsHomeComponent } from './components/bills-home/bills-home.component';
 import { BillFormComponent } from './components/bill-form/bill-form.component';
 import { BillsListComponent } from './components/bills-list/bills-list.component';
