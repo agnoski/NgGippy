@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BillService } from '../bill.service';
+import { BillService } from './../../services/bill/bill.service';
 import { Bill } from '../bill'
 
 @Component({

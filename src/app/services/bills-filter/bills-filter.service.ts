@@ -13,7 +13,7 @@ export class BillsFilterService {
     this.filteredBills = new Subject<any[]>();
     if (typeof Worker !== 'undefined') {
       // Create a new
-      this.webWorker = new Worker('../web-workers/bills-filter.worker', { type: 'module' });
+      this.webWorker = new Worker('../../web-workers/bills-filter.worker', { type: 'module' });
       this.webWorker.onmessage = ({ data }) => {
         this.filteredBills.next(data);
       };

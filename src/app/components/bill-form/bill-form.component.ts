@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Bill } from '../bill';
-import { BillService } from '../bill.service';
-import { AuthService } from '../../services/auth.service';
+import { BillService } from './../../services/bill/bill.service';
+import { AuthService } from './../../services/auth/auth.service';
 
 @Component({
   selector: 'app-bill-form',

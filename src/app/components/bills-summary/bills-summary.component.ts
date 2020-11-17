@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyValue } from '@angular/common';
-import { BillService } from '../bill.service';
-import { BillsFilterService } from '../../services/bills-filter.service';
+import { BillService } from './../../services/bill/bill.service';
+import { BillsFilterService } from './../../services/bills-filter/bills-filter.service';
 import { map } from 'rxjs/operators';
 
 interface Summary {
