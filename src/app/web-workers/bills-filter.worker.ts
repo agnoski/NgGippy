@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-import { BillsFilter } from '../classes/bills-filter'
+import { BillsFilter } from '../classes/bills-filter/bills-filter'
 
 const billsFilter = new BillsFilter();
 
