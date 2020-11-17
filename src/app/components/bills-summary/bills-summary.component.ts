@@ -2,25 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValue } from '@angular/common';
 import { BillService } from './../../services/bill/bill.service';
 import { BillsFilterService } from './../../services/bills-filter/bills-filter.service';
+import { Summary } from './../../interfaces/summary';
 import { map } from 'rxjs/operators';
-
-interface Summary {
-	info: string,
-	years: {
-		[key: number]: {
-			total: number,
-			months: {
-				[key: number]: {
-					name: string,
-					total: number,
-					categories: {
-						[key: string]: number 
-					}
-				}
-			}
-		}
-	}
-}
 
 @Component({
   selector: 'app-bills-summary',
